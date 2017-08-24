@@ -1,6 +1,28 @@
 ## Reuqests 源码阅读 v0.3.0
 
 
+# add by JesseYan on 2017-08-24:
+## 1. __repr__
+## 2. __nonzero__
+## 3. 
+v0.2
+```python
+# url encode GET params if it's a dict
+if isinstance(self.params, dict):
+	params = urllib.urlencode(self.params)
+else:
+
+	params = self.params
+```
+vs v0.3
+```python
+# url encode data if it's a dict
+if hasattr(data, 'items'):
+	self._enc_data = urllib.urlencode(data)
+else:
+	self._enc_data = data
+```
+
 ### 0x00
 2011.2.14 是礼拜一。
 
