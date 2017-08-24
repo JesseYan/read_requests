@@ -1,13 +1,14 @@
 
+=============================================================================================
 - Extremely simple GET, HEAD, POST, PUT, DELETE Requests
     + Simple HTTP Header Request Attachment
     + Simple Data/Params Request Attachment
 - Simple Basic HTTP Authentication
     + Simple URL + HTTP Auth Registry
+=============================================================================================
 	
-	
-
-**By JesseYan on 2017-08-04:
+``` shell
+By JesseYan on 2017-08-04:
 v0.2版本：requests在urllib和urllib2上封装，主要增加了：
 1. 请求方法实现GET, HEAD, POST, PUT, DELETE(urllib2只有post和get方法)
 2. get/head/DELETE方法可传参数paras，post方法可传data
@@ -19,8 +20,8 @@ def _detect_auth(url, auth):
 
 	return _get_autoauth(url) if not auth else auth
 ```
-v0.2评论完毕**
-
+v0.2评论完毕
+```
 
 
 ### 0X00
@@ -209,9 +210,9 @@ self.assertRaises 这个用法我没用过，去翻了一个标准库文档，�
 
 ```python
 def test_split(self):
-      # check that s.split fails when the separator is not a string
-      with self.assertRaises(TypeError):
-          s.split(2)
+	# check that s.split fails when the separator is not a string
+	with self.assertRaises(TypeError):
+	  s.split(2)
 
 ```
 函数定义：
@@ -328,50 +329,50 @@ r,auth = _detect_auth(url, auth)
 
 ```python
 def send(self, anyway=False):
-		"""Sends the request. Returns True of successfull, false if not.
-		    If there was an HTTPError during transmission,
-		    self.response.status_code will contain the HTTPError code.
+	"""Sends the request. Returns True of successfull, false if not.
+		If there was an HTTPError during transmission,
+		self.response.status_code will contain the HTTPError code.
 
-		    Once a request is successfully sent, `sent` will equal True.
-		
-		    :param anyway: If True, request will be sent, even if it has
-		    already been sent.
-		"""
-		self._checks()
+		Once a request is successfully sent, `sent` will equal True.
 
-		success = False
-		
-		if self.method in ('GET', 'HEAD', 'DELETE'):
-			if (not self.sent) or anyway:
+		:param anyway: If True, request will be sent, even if it has
+		already been sent.
+	"""
+	self._checks()
 
-				# url encode GET params if it's a dict
-				if isinstance(self.params, dict):
-					params = urllib.urlencode(self.params)
-				else:
+	success = False
 
-					params = self.params
+	if self.method in ('GET', 'HEAD', 'DELETE'):
+		if (not self.sent) or anyway:
 
-				req = _Request(("%s?%s" % (self.url, params)), method=self.method)
+			# url encode GET params if it's a dict
+			if isinstance(self.params, dict):
+				params = urllib.urlencode(self.params)
+			else:
 
-				if self.headers:
-					req.headers = self.headers
+				params = self.params
 
-				opener = self._get_opener()
+			req = _Request(("%s?%s" % (self.url, params)), method=self.method)
 
-				try:
-					resp = opener(req)
-					self.response.status_code = resp.code
-					self.response.headers = resp.info().dict
-					if self.method.lower() == 'get':
-						self.response.content = resp.read()
+			if self.headers:
+				req.headers = self.headers
 
-					success = True
-				except urllib2.HTTPError, why:
-					self.response.status_code = why.code
-					
-		self.sent = True if success else False
-		
-		return success
+			opener = self._get_opener()
+
+			try:
+				resp = opener(req)
+				self.response.status_code = resp.code
+				self.response.headers = resp.info().dict
+				if self.method.lower() == 'get':
+					self.response.content = resp.read()
+
+				success = True
+			except urllib2.HTTPError, why:
+				self.response.status_code = why.code
+
+	self.sent = True if success else False
+
+	return success
 ```
 self._checks() 是封装了url是否非None 的函数。pass
 
@@ -380,20 +381,19 @@ self._checks() 是封装了url是否非None 的函数。pass
 正如作者所说，这个版本封装了urllib, urllib2 的方法，像我这种被reqeusts 宠坏了的人，为了拆他，滚去翻urllib2的文档了 （；￣ェ￣）
 
 ```python
-		if isinstance(self.params, dict):
-			params = urllib.urlencode(self.params)
-		else:
+if isinstance(self.params, dict):
+	params = urllib.urlencode(self.params)
+else:
 
-			params = self.params
+	params = self.params
 
-		req = _Request(("%s?%s" % (self.url, params)), method=self.method)
+req = _Request(("%s?%s" % (self.url, params)), method=self.method)
 ```
 
 如果传过来parms 形如 
 
-```
+```python
 parms ={'age':23, 'name':wsp}, url='www.baidu.com'
-
 
 ```
 
