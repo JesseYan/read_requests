@@ -408,7 +408,8 @@ class _Request(urllib2.Request):
 
 接着 `resp = opener(req)` , 等于 `resp = urllib2.urlopen(urllib.Reuqest())`了。即是调用标准库发送请求的真正的方法了。
 
-最后组装返回的类，没什么好说的了
+最后组装返回的类
+__**这里，urlopen既可以传url字符串，也可以传一个Request类型的instance**__
 
 ```
 	self.response.status_code = resp.code
