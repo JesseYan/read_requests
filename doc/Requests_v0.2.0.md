@@ -1,11 +1,11 @@
 
-=============================================================================================
+=====================================================================================
 - Extremely simple GET, HEAD, POST, PUT, DELETE Requests
     + Simple HTTP Header Request Attachment
     + Simple Data/Params Request Attachment
 - Simple Basic HTTP Authentication
     + Simple URL + HTTP Auth Registry
-=============================================================================================
+=====================================================================================
 	
 ``` shell
 By JesseYan on 2017-08-04:
@@ -13,6 +13,7 @@ v0.2版本：requests在urllib和urllib2上封装，主要增加了：
 1. 请求方法实现GET, HEAD, POST, PUT, DELETE(urllib2只有post和get方法)
 2. get/head/DELETE方法可传参数paras，post方法可传data
 3. 基本的auth，其实requests在这方面仅仅提供传参，没有实质功能。如下:
+```
 ```python
 def _detect_auth(url, auth):
 	"""Returns registered AuthObject for given url if available, defaulting to
@@ -20,8 +21,7 @@ def _detect_auth(url, auth):
 
 	return _get_autoauth(url) if not auth else auth
 ```
-v0.2评论完毕
-```
+**v0.2评论完毕**
 
 
 ### 0X00
