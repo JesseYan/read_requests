@@ -5,8 +5,9 @@
 - Simple Basic HTTP Authentication
     + Simple URL + HTTP Auth Registry
 	
-**
-By JesseYan on 2017-08-04:
+	
+
+**By JesseYan on 2017-08-04:
 v0.2版本：requests在urllib和urllib2上封装，主要增加了：
 1. 请求方法实现GET, HEAD, POST, PUT, DELETE(urllib2只有post和get方法)
 2. get/head/DELETE方法可传参数paras，post方法可传data
@@ -18,8 +19,7 @@ def _detect_auth(url, auth):
 
 	return _get_autoauth(url) if not auth else auth
 ```
-v0.2评论完毕
-**
+v0.2评论完毕**
 
 
 
@@ -164,7 +164,7 @@ API 部分，安装部分，就直接跳过吧。
 
 requests 代码之前，先从测试代码开始吧。
 
-```
+```python
 class RequestsTestSuite(unittest.TestCase):
 	"""Requests test cases."""
 	
@@ -207,8 +207,8 @@ class RequestsTestSuite(unittest.TestCase):
 
 self.assertRaises 这个用法我没用过，去翻了一个标准库文档，文档里面有这样一个例子，还是很好玩的：
 
-```
-	def test_split(self):
+```python
+def test_split(self):
       # check that s.split fails when the separator is not a string
       with self.assertRaises(TypeError):
           s.split(2)
@@ -224,7 +224,7 @@ assertRaises(exc, fun, *args, **kwds)
 
 当使用 requests.get('www.baidu.com')时，直接到requests 包定义的相应函数，以 get 举例。
 
-```
+```python
 def get(url, params={}, headers={}, auth=None):
 	"""Sends a GET request. Returns :class:`Response` object.
 
@@ -249,7 +249,7 @@ def get(url, params={}, headers={}, auth=None):
 ```
 先会实例化一个 Request, Request 类定义在47行。
 
-```
+```python
 class Request(object):
 	"""The :class:`Request` object. It carries out all functionality of
 	Requests. Recommended interface is with the Requests functions.
@@ -281,7 +281,7 @@ class Request(object):
 
 在 `__setattr__`  对method做了限制。
 
-```
+```python
 	def __setattr__(self, name, value):
 		if (name == 'method') and (value):
 			if not value in self._METHODS:
@@ -293,7 +293,7 @@ class Request(object):
 这也是一个好玩的用法，我比较水啦，如果是我，我会直接在类初始化的时候搞定这些...
 就像下面这样。
 
-```
+```python
 class Request(object):
 	"""The :class:`Request` object. writtern by Lionel Wang	
 	"""
@@ -316,7 +316,7 @@ class Request(object):
 
 有没有高人跟我说下这样的好处？
 
-```
+```python
 r,auth = _detect_auth(url, auth)
 ```
 
@@ -326,7 +326,7 @@ r,auth = _detect_auth(url, auth)
 
 在Requests.send() 里面，对 method 的不同，做了不一样的处理，我们只看get。
 
-```
+```python
 def send(self, anyway=False):
 		"""Sends the request. Returns True of successfull, false if not.
 		    If there was an HTTPError during transmission,
@@ -379,7 +379,7 @@ self._checks() 是封装了url是否非None 的函数。pass
 
 正如作者所说，这个版本封装了urllib, urllib2 的方法，像我这种被reqeusts 宠坏了的人，为了拆他，滚去翻urllib2的文档了 （；￣ェ￣）
 
-```
+```python
 		if isinstance(self.params, dict):
 			params = urllib.urlencode(self.params)
 		else:
@@ -408,7 +408,7 @@ urllib.urlencode(query, [,doseq])
 _Request 是继承了 urllib2.Requsts 的类。
 代码如下
 
-```
+```python
 class _Request(urllib2.Request):
 	"""Hidden wrapper around the urllib2.Request object. Allows for manual
 	setting of HTTP methods.
@@ -436,7 +436,7 @@ class _Request(urllib2.Request):
 
 <u>**这里，urlopen既可以传url字符串，也可以传一个Request类型的instance**</u>
 
-```
+```python
 	self.response.status_code = resp.code
 	self.response.headers = resp.info().dict
 	self.response.content = resp.read()
@@ -444,7 +444,7 @@ class _Request(urllib2.Request):
 
 不过try except 写的很好玩。
 
-```
+```python
 except urllib2.HTTPError, why:
 	self.response.status_code = why.code
 ```
