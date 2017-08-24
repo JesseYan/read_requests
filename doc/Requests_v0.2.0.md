@@ -23,6 +23,44 @@ def _detect_auth(url, auth):
 	return _get_autoauth(url) if not auth else auth
 ```
 
+**思考问题:**
+```python
+def __setattr__(self, name, value):
+	if (name == 'method') and (value):
+		if not value in self._METHODS:
+			raise InvalidMethod()
+	
+	object.__setattr__(self, name, value)
+```
+
+这也是一个好玩的用法，一般的写法如下：
+
+```python
+class Request(object):
+	"""The :class:`Request` object. writtern by Lionel Wang	
+	"""
+	
+	_METHODS = ('GET', 'HEAD', 'PUT', 'POST', 'DELETE')
+	
+	def __init__(self, url, method, data, params):
+		self.url = url
+		self.headers = dict()
+		self.method = method
+		self.params = params
+		self.data = data
+		self.response = Response()
+		self.auth = None
+		self.sent = False
+		
+		if self.method not in _METHODS:
+			raise InvalidMethod
+```
+
+```shell
+源码中写法的好处是：
+利用了Python的magic写法，每次修改类的属性时，都判断要修改的如果是method，就要限定在已经定义的几个方法中。
+因为Python面向对象因为simple没有做权限控制(public，private，protected)，所以很可能初始化时判断后，很可能self.method='xxx'又改了，就懵逼了
+```
 
 ### 0X00
 
