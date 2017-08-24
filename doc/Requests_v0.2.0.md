@@ -9,7 +9,7 @@
 =====================================================================================
 	
 ``` shell
-By JesseYan on 2017-08-04:
+By JesseYan on 2017-08-24:
 v0.2版本：requests在urllib和urllib2上封装，主要增加了：
 1. 请求方法实现GET, HEAD, POST, PUT, DELETE(urllib2只有post和get方法)
 2. get/head/DELETE方法可传参数paras，post方法可传data
