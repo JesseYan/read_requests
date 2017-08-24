@@ -1,10 +1,10 @@
 ## Reuqests 源码阅读 v0.3.0
 
 
-# add by JesseYan on 2017-08-24:
-## 1. __repr__
-## 2. __nonzero__
-## 3. 
+ **add by JesseYan on 2017-08-24:**
+### 1. __repr__
+### 2. __nonzero__
+### 3. 
 v0.2
 ```python
 # url encode GET params if it's a dict
