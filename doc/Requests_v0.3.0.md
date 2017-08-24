@@ -23,6 +23,19 @@ else:
 	self._enc_data = data
 ```
 
+### 4. 单例模式使用
+`AuthManager`中
+```python
+def __new__(cls):
+	singleton = cls.__dict__.get('__singleton__')
+	if singleton is not None:
+		return singleton
+
+	cls.__singleton__ = singleton = object.__new__(cls)
+
+	return singleton
+```
+
 ### 0x00
 2011.2.14 是礼拜一。
 
