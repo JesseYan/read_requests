@@ -5,6 +5,7 @@
     + Simple Data/Params Request Attachment
 - Simple Basic HTTP Authentication
     + Simple URL + HTTP Auth Registry
+    
 =====================================================================================
 	
 ``` shell
@@ -21,7 +22,6 @@ def _detect_auth(url, auth):
 
 	return _get_autoauth(url) if not auth else auth
 ```
-**v0.2评论完毕**
 
 
 ### 0X00
